@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -41,4 +43,8 @@ public class PengajuanMagang {
 
     @Column(name = "catatan_admin", columnDefinition = "TEXT")
     private String catatanAdmin;
+
+    // Field ini ditambahkan agar fungsi repository OrderByTanggalPengajuanDesc bisa berjalan
+    @Column(name = "tanggal_pengajuan")
+    private LocalDateTime tanggalPengajuan = LocalDateTime.now();
 }

@@ -3,10 +3,12 @@ package com.magang.tracking.dto.response;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import lombok.Builder;
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class MagangStatusResponse {
     private Long mahasiswaId;
     private String namaMahasiswa;

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface MahasiswaRepository {
+public interface MahasiswaRepository extends JpaRepository<Mahasiswa, Long>{
     Optional<Mahasiswa> findByUser(User user);
     Optional<Mahasiswa> findByNim(String nim);    
 } 

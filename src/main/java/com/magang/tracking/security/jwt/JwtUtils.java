@@ -1,28 +1,21 @@
 package com.magang.tracking.security.jwt;
 
-import java.security.Key;
-import java.util.Date;
-
-import org.springframework.beans.factory.annotation.Value;
+import com.magang.tracking.security.services.UserDetailsImpl;
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import com.magang.tracking.security.services.UserDetailsImpl;
-
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
+import java.security.Key;
+import java.util.Date;
 
 @Component
 public class JwtUtils {
 
-    @Value("${magang.app.jwtSecret}")
-    private String jwtSecret;
-
-    @Value("${magang.app.jwtExpirationMs}")
-    private int jwtExpirationMs;
+    // Gunakan Key 256-bit (Base64)
+    private final String jwtSecret = "IniAdalahKunciRahasiaSuperPanjangUntukSistemTrackingMagangBackend2024Base64xyz=";
+    private final int jwtExpirationMs = 86400000; // 24 Jam
 
     public String generateJwtToken(Authentication authentication) {
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
@@ -46,7 +39,7 @@ public class JwtUtils {
 
     public boolean validateJwtToken(String authToken) {
         try {
-            Jwts.parserBuilder().setSigningKey(key()).build().parse(authToken);
+            Jwts.parserBuilder().setSigningKey(key()).build().parseClaimsJws(authToken);
             return true;
         } catch (JwtException | IllegalArgumentException e) {
             System.err.println("Invalid JWT token: " + e.getMessage());

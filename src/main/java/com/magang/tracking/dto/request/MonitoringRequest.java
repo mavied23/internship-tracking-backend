@@ -4,8 +4,9 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class LogbookRequest {
+public class MonitoringRequest {
+    private Long mahasiswaId;
+    private Integer evaluasi;
+    private String catatan;
     private LocalDate tanggal;
-    private Integer jamKerja;
-    private String aktivitas;
 }

@@ -4,7 +4,7 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class PengajuanMagangRequest {
+public class PengajuanRequest {
     private String perusahaan;
     private String alamat;
     private LocalDate tanggalMulai;

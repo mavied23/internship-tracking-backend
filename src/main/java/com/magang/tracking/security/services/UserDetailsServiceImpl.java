@@ -1,25 +1,25 @@
 package com.magang.tracking.security.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.magang.tracking.entity.User;
+import com.magang.tracking.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.magang.tracking.entity.User;
-import com.magang.tracking.repository.UserRepository;
-
 @Service
+@RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
-
-        return UserDetailsImpl.build(user);
-    }
+public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    // Pastikan username tidak memiliki spasi di awal/akhir
+    User user = userRepository.findByUsername(username.trim())
+            .orElseThrow(() -> new UsernameNotFoundException("User Not Found: " + username));
+    
+    return UserDetailsImpl.build(user);
+}
 }

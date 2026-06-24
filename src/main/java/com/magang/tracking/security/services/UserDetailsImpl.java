@@ -28,7 +28,16 @@ public class UserDetailsImpl implements UserDetails {
     }
 
     public static UserDetailsImpl build(User user) {
-        GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
+        // Amankan jika role di database ternyata kosong (null)
+        String roleName = user.getRole() != null ? user.getRole() : "MAHASISWA";
+        
+        // Buat format uppercase dan pastikan diawali dengan "ROLE_" agar kompatibel dengan hasRole()
+        String roleWithPrefix = roleName.toUpperCase().startsWith("ROLE_") 
+                ? roleName.toUpperCase() 
+                : "ROLE_" + roleName.toUpperCase();
+
+        GrantedAuthority authority = new SimpleGrantedAuthority(roleWithPrefix);
+
         return new UserDetailsImpl(
                 user.getId(),
                 user.getUsername(),
@@ -57,14 +66,22 @@ public class UserDetailsImpl implements UserDetails {
     }
 
     @Override
-    public boolean isAccountNonExpired() { return true; }
+    public boolean isAccountNonExpired() { 
+        return true; 
+    }
 
     @Override
-    public boolean isAccountNonLocked() { return true; }
+    public boolean isAccountNonLocked() { 
+        return true; 
+    }
 
     @Override
-    public boolean isCredentialsNonExpired() { return true; }
+    public boolean isCredentialsNonExpired() { 
+        return true; 
+    }
 
     @Override
-    public boolean isEnabled() { return true; }
+    public boolean isEnabled() { 
+        return true; 
+    }
 }

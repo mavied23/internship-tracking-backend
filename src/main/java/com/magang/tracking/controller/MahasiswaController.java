@@ -25,9 +25,9 @@ public class MahasiswaController {
     @PostMapping(value = "/pengajuan", consumes = {"multipart/form-data"})
     public ResponseEntity<?> ajukanMagang(
             @ModelAttribute PengajuanMagangRequest request,
-            @RequestPart("suratPengantar") MultipartFile suratPengantar,
-            @RequestPart("proposal") MultipartFile proposal) {
-        return ResponseEntity.ok(magangService.ajukanMagang(request, suratPengantar, proposal));
+            @RequestParam("dokumen") MultipartFile dokumen) {
+        
+        return ResponseEntity.ok(magangService.ajukanMagang(request, dokumen));
     }
 
     @PutMapping(value = "/pengajuan/{id}", consumes = {"multipart/form-data"})

@@ -23,6 +23,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -147,6 +148,31 @@ public class MagangServiceImpl implements MagangService {
         pengajuanMagangRepository.save(pengajuan);
 
         return new ApiResponse<>(true, "Pengajuan magang berhasil diverifikasi dengan status: " + request.getStatus(), null);
+    }
+    // --- FITUR ADMIN: DETAIL PENGAJUAN ---
+    @Override
+    public ApiResponse<?> getDetailPengajuan(Long id) {
+        PengajuanMagang pengajuan = pengajuanMagangRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pengajuan tidak ditemukan"));
+        return new ApiResponse<>(true, "Detail pengajuan berhasil diambil", pengajuan);
+    }
+
+    // --- FITUR ADMIN: BULK APPROVE ---
+    @Override
+    public ApiResponse<?> bulkApprove(List<Long> ids) {
+        if (ids == null || ids.isEmpty()) {
+            return new ApiResponse<>(false, "Tidak ada data yang dipilih", null);
+        }
+        
+        List<PengajuanMagang> listPengajuan = pengajuanMagangRepository.findAllById(ids);
+        
+        for (PengajuanMagang pengajuan : listPengajuan) {
+            pengajuan.setStatus("DITERIMA");
+        }
+        
+        pengajuanMagangRepository.saveAll(listPengajuan);
+        
+        return new ApiResponse<>(true, "Berhasil menyetujui " + listPengajuan.size() + " pengajuan.", null);
     }
 
     @Override

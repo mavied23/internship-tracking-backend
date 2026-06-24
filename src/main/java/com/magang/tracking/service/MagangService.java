@@ -3,6 +3,7 @@ package com.magang.tracking.service;
 import com.magang.tracking.dto.request.*;
 import com.magang.tracking.dto.response.*;
 import org.springframework.web.multipart.MultipartFile;
+import java.util.List;
 
 public interface MagangService {
     ApiResponse<MagangStatusResponse> getStatusMagang();
@@ -12,4 +13,6 @@ public interface MagangService {
     ApiResponse<?> getAllPengajuan(int page, int size);
     ApiResponse<?> verifikasiPengajuan(Long id, VerifikasiRequest request);
     ApiResponse<?> setPenempatanMagang(PenempatanRequest request);
+    ApiResponse<?> getDetailPengajuan(Long id);
+    ApiResponse<?> bulkApprove(List<Long> ids);
 }

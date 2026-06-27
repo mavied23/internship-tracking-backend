@@ -7,4 +7,6 @@ import java.util.Optional;
 public interface PengajuanMagangRepository extends JpaRepository<PengajuanMagang, Long> {
     // Mencari pengajuan terakhir berdasarkan ID mahasiswa
     Optional<PengajuanMagang> findFirstByMahasiswaIdOrderByTanggalPengajuanDesc(Long mahasiswaId);
+
+    long countByStatus(String status);
 }

@@ -32,5 +32,5 @@ public class PenempatanMagang {
     private LocalDate tanggalSelesai;
 
     @Column(nullable = false)
-    private String status;
+    private String status = "AKTIF";
 }

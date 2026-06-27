@@ -5,4 +5,5 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface LaporanService {
     ApiResponse<?> uploadLaporan(MultipartFile fileLaporan);
+    ApiResponse<?> getLaporanMahasiswa();
 }

@@ -26,7 +26,6 @@ public class MahasiswaController {
     public ResponseEntity<?> ajukanMagang(
             @ModelAttribute PengajuanMagangRequest request,
             @RequestParam("dokumen") MultipartFile dokumen) {
-        
         return ResponseEntity.ok(magangService.ajukanMagang(request, dokumen));
     }
 
@@ -39,6 +38,12 @@ public class MahasiswaController {
         return ResponseEntity.ok(magangService.revisiPengajuan(id, request, suratPengantar, proposal));
     }
 
+    // ========== LOGBOOK =========
+    @GetMapping("/logbook")
+    public ResponseEntity<?> getLogbook() {
+        return ResponseEntity.ok(logbookService.getLogbookMahasiswa());
+    }
+
     @PostMapping(value = "/logbook", consumes = {"multipart/form-data"})
     public ResponseEntity<?> inputLogbook(
             @ModelAttribute LogbookRequest request,
@@ -46,6 +51,11 @@ public class MahasiswaController {
         return ResponseEntity.ok(logbookService.inputLogbook(request, dokumentasi));
     }
 
+    // ========== LAPORAN AKHIR ===========
+    @GetMapping("/laporan-akhir")
+    public ResponseEntity<?> getLaporan() {
+        return ResponseEntity.ok(laporanService.getLaporanMahasiswa());
+    }
     @PostMapping(value = "/laporan-akhir", consumes = {"multipart/form-data"})
     public ResponseEntity<?> uploadLaporanAkhir(
             @RequestPart("fileLaporan") MultipartFile fileLaporan) {

@@ -30,4 +30,8 @@ public class Penilaian {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mahasiswa_id", referencedColumnName = "id")
     private Mahasiswa mahasiswa;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dosen_id")
+    private Dosen dosen;
 }

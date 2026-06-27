@@ -8,4 +8,6 @@ import org.springframework.web.multipart.MultipartFile;
 public interface LogbookService {
     ApiResponse<?> inputLogbook(LogbookRequest request, MultipartFile dokumentasi);
     ApiResponse<?> verifikasiLogbook(Long logbookId, VerifikasiRequest request);
+    ApiResponse<?> getLogbookMahasiswa();
+    ApiResponse<?> getLogbookByMahasiswaId(Long mahasiswaId);
 }

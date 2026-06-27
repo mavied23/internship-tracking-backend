@@ -5,4 +5,5 @@ import com.magang.tracking.dto.response.ApiResponse;
 
 public interface PenilaianService {
     ApiResponse<?> inputPenilaian(PenilaianRequest request);
+    ApiResponse<?> getPenilaianByMahasiswaId(Long mahasiswaId);
 }

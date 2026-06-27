@@ -5,4 +5,6 @@ import com.magang.tracking.dto.response.ApiResponse;
 
 public interface MonitoringService {
     ApiResponse<?> inputMonitoring(MonitoringRequest request);
+    ApiResponse<?> getMonitoringByMahasiswaId(Long mahasiswaId);
+    ApiResponse<?> getMonitoringByDosen();
 }
